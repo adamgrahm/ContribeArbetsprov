@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ContribeArbetsprov.Models.IBook>
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@{ 
+    Layout = null;
+    decimal totalPrice = 0;
+}
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <h3>@ViewBag.ErrorMessage</h3>
+        @Html.ActionLink("Back to store", "Index", "Home", null, new { @class = "btn btn-success" })
+    }
+    @if (Model != null)
+    {
+        <div class="col-md-3">
+            <h3>Forgot something?</h3>
+            <h3> Go back to the store!</h3>
+            @Html.ActionLink("Store", "GoBackToStore", "Home", null, new { @class = "btn btn-success" })
+        </div>
+            
+
+            <div class="col-md-9">
+                <hr />
+                <h2>You bought these books!</h2>
+                @foreach (var item in Model)
+                {
+                    totalPrice = totalPrice + item.Price;
+                    <ul style="list-style:none; border:solid;" class="col-md-4">
+                        <li>@item.Title</li>
+                        <li>@item.Author</li>
+                        <li>@item.Price :-</li>
+                    </ul>
+                }
+            </div>
+        <div class="col-md-9 col-md-offset-3">
+            <hr />
+            <h2>Total Price: @totalPrice :-</h2>
+        </div>
+    }
+

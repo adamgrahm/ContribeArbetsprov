@@ -1,0 +1,53 @@
+﻿
+@{ 
+    decimal tots = 0;
+}
+
+
+
+
+<div class="col-md-3">
+    <!--MENU-->
+    <h4>Keep shopping?</h4>
+    @Html.ActionLink("Back to store", "Index", "Home", null, new { @class ="btn btn-success"})
+
+</div>
+
+<div class="col-md-9">
+    <!--PRODUCTS-->
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <h2 style="color:red;">@ViewBag.ErrorMessage</h2>
+    } 
+    <hr />
+    
+    
+    @if (Model != null)
+    {
+        
+        foreach (var item in Model)
+        {
+            tots = tots + item.Price;
+            <ul style="list-style:none; border:ridge;" class="col-md-4">
+                <li><label>Title: </label><span>@item.Title</span></li>
+                <li><label>Author: </label><span>@item.Author</span></li>
+                <li><label>Price: </label><span>@item.Price :-</span></li>
+                <li>@Html.ActionLink("Remove item", "RemoveFromCart", "Home", routeValues: new
+               { Title = item.Title, Author = item.Author, Price = item.Price }, 
+               htmlAttributes: new { @class = "btn btn-sm btn-danger" })</li>
+            </ul>
+        }
+        <br />
+        
+    }
+    else
+    {
+        <p>Inget i kundvagnen</p>
+    }
+</div>
+
+<div class="col-md-9 col-md-offset-3">
+    <hr />
+    <h3>Total Price: @tots</h3>
+    @Html.ActionLink("Place Order", "PlaceOrder", "Home", routeValues: null, htmlAttributes: new {@class = "btn btn-success" } )
+</div>

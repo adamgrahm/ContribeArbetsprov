@@ -1,0 +1,24 @@
+﻿
+
+@foreach (var item in Model)
+{
+    <ul style="list-style:none; border:ridge; background-color:beige;" class="col-md-4">
+        <li><p>Title: @item.Title </p></li>
+        <li><p>Author: @item.Author</p></li>
+        <li><p>Price: @item.Price :-</p></li>
+        @if (item.InStock == "0")
+                {
+            <li><p style="color:red;">Sorry, item is out of stock.</p></li>
+        }
+        else
+        {
+            <li><p>InStock: @item.InStock st</p></li>
+            <li>
+                @Html.ActionLink("Add to cart", "AddToCart", "Home", routeValues: new
+                { Title = item.Title, Author = item.Author, Price = item.Price, InStock = item.InStock },
+                htmlAttributes: new { @class = "btn btn-success" })
+        </li>
+        }
+        
+    </ul>
+}
