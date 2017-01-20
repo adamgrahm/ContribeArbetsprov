@@ -79,12 +79,6 @@ namespace ContribeArbetsprov.Controllers
             return RedirectToAction("GoToCart");
         }
 
-        
-
-        public ActionResult ReturnBooks(string searchString)
-        {
-            return RedirectToAction("Index", new { searchString = searchString });
-        }
 
         public ActionResult GoToCart()
         {
